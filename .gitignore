@@ -4,7 +4,7 @@
 /bin/
 /.shards/
 availabilities
-conference_room
+./conference_room
 .env
 
 # Libraries don't need dependency lock
