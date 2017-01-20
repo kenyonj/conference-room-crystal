@@ -12,7 +12,7 @@ class ConferenceRoom::IcalResponse
 
   def parse
     raw_events.map do |raw_event|
-      event = EventParser.new(raw_event)
+      event = IcalEventParser.new(raw_event)
       CalendarEvent.new(start_time: event.start_time, end_time: event.end_time)
     end
   end

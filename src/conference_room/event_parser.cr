@@ -1,4 +1,6 @@
-class ConferenceRoom::EventParser
+class ConferenceRoom::IcalEventParser
+  ICAL_TIME_FORMAT = "%Y%m%dT%k%M%SZ"
+
   getter :raw_event
 
   def initialize(@raw_event : String)
@@ -13,7 +15,7 @@ class ConferenceRoom::EventParser
   end
 
   private def parse_time(field_name)
-    Time.parse(value_from(field_name), "%Y%m%dT%k%M%SZ")
+    Time.parse(value_from(field_name), ICAL_TIME_FORMAT)
   end
 
   private def value_from(field_name)
