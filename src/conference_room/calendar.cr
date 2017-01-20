@@ -1,6 +1,13 @@
 require "http/client"
 
 class ConferenceRoom::Calendar
+  CALENDAR_IDS = {
+    bender: ENV["BENDER_ID"],
+    optimus: ENV["OPTIMUS_ID"],
+    eve: ENV["EVE_ID"],
+    walle: ENV["WALLE_ID"],
+  }
+
   getter :name
 
   def initialize(@name : Symbol)
