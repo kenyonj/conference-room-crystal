@@ -1,7 +1,7 @@
 class ConferenceRoom::IcalResponse
-  EVENT_DELIMITER = "BEGIN:VEVENT"
-
-  getter :raw_calendar
+  private getter calendar_metadata_position = 1
+  private getter event_delimiter = "BEGIN:VEVENT"
+  private getter raw_calendar
 
   def initialize(@raw_calendar : String)
   end
@@ -18,10 +18,6 @@ class ConferenceRoom::IcalResponse
   end
 
   private def raw_events
-    raw_calendar.split(EVENT_DELIMITER).skip(calendar_metadata_position)
-  end
-
-  private def calendar_metadata_position
-    1
+    raw_calendar.split(event_delimiter).skip(calendar_metadata_position)
   end
 end
