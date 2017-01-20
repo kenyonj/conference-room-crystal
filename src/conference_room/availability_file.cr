@@ -8,9 +8,9 @@ class ConferenceRoom::AvailabilityFile
   end
 
   private def write_updated_calendar_availabilities
-    rows = String.build do |rows|
+    rows = String.build do |availabilities|
       all_calendars.each do |calendar|
-        rows << "#{calendar.name} #{calendar.busy_code}\n"
+        availabilities << "#{calendar.name} #{calendar.availability_code}\n"
       end
     end
 

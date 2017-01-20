@@ -6,11 +6,11 @@ class ConferenceRoom::Calendar
   def initialize(@name : Symbol)
   end
 
-  def busy_code
+  def availability_code
     if has_event_happening_now?
-      "0"
+      :busy
     else
-      "1"
+      :available
     end
   end
 
