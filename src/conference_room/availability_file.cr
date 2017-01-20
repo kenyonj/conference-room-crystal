@@ -1,20 +1,14 @@
 class ConferenceRoom::AvailabilityFile
-  def self.update
-    new.update
+  def self.to_text
+    new.to_text
   end
 
-  def update
-    write_updated_calendar_availabilities
-  end
-
-  private def write_updated_calendar_availabilities
-    rows = String.build do |availabilities|
+  def to_text
+    String.build do |availabilities|
       all_calendars.each do |calendar|
         availabilities << "#{calendar.name} #{calendar.availability_code}\n"
       end
     end
-
-    File.write("availabilities", rows)
   end
 
   private def all_calendars
