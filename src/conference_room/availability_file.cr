@@ -6,7 +6,9 @@ class ConferenceRoom::AvailabilityFile
   def to_text
     String.build do |availabilities|
       Calendar.all.each do |calendar|
-        availabilities << "#{calendar.name} #{calendar.availability_code}\n"
+        availabilities << "#{calendar.name}"
+        availabilities << " #{calendar.availability_code}"
+        availabilities << " #{calendar.minutes_until_state_change}\n"
       end
     end
   end

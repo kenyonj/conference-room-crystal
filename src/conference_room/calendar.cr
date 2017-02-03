@@ -11,6 +11,7 @@ class ConferenceRoom::Calendar
   getter :name
   private getter busy_code = 0
   private getter available_code = 1
+  private getter available_indefinitely = 9999999
 
   def initialize(@name : Symbol)
   end
@@ -29,8 +30,34 @@ class ConferenceRoom::Calendar
     end
   end
 
+  def minutes_until_state_change
+    if has_event_happening_now?
+      minutes_until_free
+    else
+      minutes_until_busy
+    end
+  end
+
   private def has_event_happening_now?
     events.any? &.happening_now?
+  end
+
+  private def minutes_until_busy
+    if future_events.empty?
+      available_indefinitely
+    else
+      (future_events.first.start_time - Time.utc_now).total_minutes.ceil.to_i
+    end
+  end
+
+  private def minutes_until_free
+
+  end
+
+  private def future_events
+    events.select do |event|
+      event.start_time > Time.utc_now
+    end
   end
 
   private def events
