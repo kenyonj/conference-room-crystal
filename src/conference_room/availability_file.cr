@@ -10,6 +10,7 @@ class ConferenceRoom::AvailabilityFile
         availabilities << " #{calendar.availability_code}"
         availabilities << " #{calendar.minutes_until_state_change}\n"
       end
+
     end
   end
 end
