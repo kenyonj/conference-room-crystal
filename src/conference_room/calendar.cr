@@ -13,6 +13,8 @@ class ConferenceRoom::Calendar
   private getter available_code = 1
   private getter available_indefinitely = 9999999
 
+  @events : Array(CalendarEvent)?
+
   def initialize(@name : Symbol)
   end
 
@@ -51,7 +53,11 @@ class ConferenceRoom::Calendar
   end
 
   private def minutes_until_free
+    MinutesUntilFreeCalculator.new(future_events).minutes_until_free
+  end
 
+  private def current_event
+    events.find(&.happening_now?).not_nil!
   end
 
   private def future_events
@@ -61,7 +67,11 @@ class ConferenceRoom::Calendar
   end
 
   private def events
-    IcalResponse.parse(raw_events)
+    @events ||= IcalResponse.parse(raw_events).sort_by &->earliest_first(CalendarEvent)
+  end
+
+  private def earliest_first(event)
+    event.start_time
   end
 
   private def raw_events
