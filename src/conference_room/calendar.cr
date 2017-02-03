@@ -15,9 +15,11 @@ class ConferenceRoom::Calendar
 
   def availability_code
     if has_event_happening_now?
-      :busy
+      0
+      # :busy
     else
-      :available
+      1
+      # :available
     end
   end
 
