@@ -9,17 +9,23 @@ class ConferenceRoom::Calendar
   }
 
   getter :name
+  private getter busy_code = 0
+  private getter available_code = 1
 
   def initialize(@name : Symbol)
   end
 
+  def self.all
+    CALENDAR_IDS.keys.map do |calendar_name|
+      new(calendar_name)
+    end
+  end
+
   def availability_code
     if has_event_happening_now?
-      0
-      # :busy
+      busy_code
     else
-      1
-      # :available
+      available_code
     end
   end
 
