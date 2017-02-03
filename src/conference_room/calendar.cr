@@ -11,7 +11,7 @@ class ConferenceRoom::Calendar
   getter :name
   private getter busy_code = 0
   private getter available_code = 1
-  private getter available_indefinitely = 9999999
+  private getter available_indefinitely : Int32 = 9.nines
 
   @events : Array(CalendarEvent)?
 
