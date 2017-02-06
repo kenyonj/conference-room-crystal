@@ -1,7 +1,5 @@
 # conference_room
 
-TODO: Write a description here
-
 ## Installation
 
 Add this to your application's `shard.yml`:
